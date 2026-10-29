@@ -5,6 +5,7 @@ CREATE TABLE product (
     name        VARCHAR(128) NOT NULL,
     code        VARCHAR(64)  NOT NULL,
     category    VARCHAR(64),
+    brand_id    BIGINT,
     price       DECIMAL(12, 2),
     stock       INT DEFAULT 0,
     unit        VARCHAR(16),
