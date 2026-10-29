@@ -30,6 +30,9 @@ public class Product {
 	/** 分类 */
 	private String category;
 
+	/** 品牌ID */
+	private Long brandId;
+
 	/** 价格 */
 	private BigDecimal price;
 

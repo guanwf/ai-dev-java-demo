@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -55,8 +56,11 @@ public class ProductController {
 
 	/** 查询列表 */
 	@GetMapping("/list")
-	public List<Product> list() {
-		return productService.list();
+	public List<Product> list(@RequestParam(name = "brandId", required = false) Long brandId) {
+		if (brandId == null) {
+			return productService.list();
+		}
+		return productService.listByBrandId(brandId);
 	}
 
 }

@@ -24,20 +24,26 @@ Then open <http://localhost:8091/> — it returns `Hello, ai-dev-java-demo!`.
 
 ## 商品资料接口（MyBatis-Plus）
 
-| Method | Path            | 说明         |
-| ------ | --------------- | ------------ |
-| GET    | /product/list   | 查询列表     |
-| GET    | /product/{id}   | 查询单个     |
-| POST   | /product        | 新增 / 保存  |
-| PUT    | /product/{id}   | 修改         |
-| DELETE | /product/{id}   | 删除         |
+| Method | Path            | 说明                       |
+| ------ | --------------- | -------------------------- |
+| GET    | /product/list   | 查询列表（可按品牌过滤）   |
+| GET    | /product/{id}   | 查询单个                   |
+| POST   | /product        | 新增 / 保存                |
+| PUT    | /product/{id}   | 修改                       |
+| DELETE | /product/{id}   | 删除                       |
 
-示例（新增）：
+`GET /product/list` 不传参数时返回全部商品；传入 `brandId` 时只返回对应品牌的商品：
+
+```bash
+curl "http://localhost:8091/product/list?brandId=1"
+```
+
+示例（新增，`brandId` 为可选字段）：
 
 ```bash
 curl -X POST http://localhost:8091/product \
   -H "Content-Type: application/json" \
-  -d '{"name":"商品","code":"SKU-1001","price":12.5,"stock":10}'
+  -d '{"name":"商品","code":"SKU-1001","brandId":1,"price":12.5,"stock":10}'
 ```
 
 ## 数据库
