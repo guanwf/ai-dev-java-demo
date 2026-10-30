@@ -33,6 +33,9 @@ public class Product {
 	/** 品牌ID */
 	private Long brandId;
 
+	/** 供应商 */
+	private String vender;
+
 	/** 价格 */
 	private BigDecimal price;
 
