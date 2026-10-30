@@ -7,6 +7,7 @@ CREATE TABLE product (
     category    VARCHAR(64),
     brand_id    BIGINT,
     price       DECIMAL(12, 2),
+    cost        DECIMAL(12, 4) NOT NULL DEFAULT 0,
     stock       INT DEFAULT 0,
     unit        VARCHAR(16),
     status      TINYINT DEFAULT 1,

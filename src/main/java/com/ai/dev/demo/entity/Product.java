@@ -36,6 +36,9 @@ public class Product {
 	/** 价格 */
 	private BigDecimal price;
 
+	/** 进价 */
+	private BigDecimal cost;
+
 	/** 库存 */
 	private Integer stock;
 
