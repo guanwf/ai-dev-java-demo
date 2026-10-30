@@ -28,3 +28,11 @@ CREATE TABLE brand (
     create_time DATETIME,
     update_time DATETIME
 );
+
+DROP TABLE IF EXISTS category;
+
+CREATE TABLE category (
+    id   BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(64)  NOT NULL,
+    name VARCHAR(128) NOT NULL
+);
