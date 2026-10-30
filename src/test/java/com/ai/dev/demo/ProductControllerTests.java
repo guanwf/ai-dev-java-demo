@@ -62,6 +62,31 @@ class ProductControllerTests {
 				.andExpect(jsonPath("$.brandId").value(brandId));
 	}
 
+	@Test
+	void saveReturnsCostWithFourDecimalPlaces() throws Exception {
+		long brandId = createBrand("BRAND-E", "品牌E");
+
+		mockMvc.perform(post("/product")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"name\":\"品牌商品\",\"code\":\"PROD-E\",\"brandId\":" + brandId
+						+ ",\"cost\":12.3456}"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.code").value("PROD-E"))
+				.andExpect(jsonPath("$.brandId").value(brandId))
+				.andExpect(jsonPath("$.cost").value(12.3456));
+	}
+
+	@Test
+	void saveDefaultsCostToZero() throws Exception {
+		long brandId = createBrand("BRAND-F", "品牌F");
+
+		mockMvc.perform(post("/product")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"name\":\"默认进价商品\",\"code\":\"PROD-F\",\"brandId\":" + brandId + "}"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.cost").value(0));
+	}
+
 	private long createBrand(String code, String name) throws Exception {
 		MvcResult result = mockMvc.perform(post("/brand")
 				.contentType(MediaType.APPLICATION_JSON)
