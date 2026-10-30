@@ -63,6 +63,26 @@ class ProductControllerTests {
 	}
 
 	@Test
+	void saveAndGetReturnsVender() throws Exception {
+		long brandId = createBrand("BRAND-G", "品牌G");
+
+		MvcResult result = mockMvc.perform(post("/product")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"name\":\"供应商商品\",\"code\":\"PROD-G\",\"brandId\":" + brandId
+						+ ",\"vender\":\"测试供应商\"}"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.code").value("PROD-G"))
+				.andExpect(jsonPath("$.vender").value("测试供应商"))
+				.andReturn();
+
+		long id = ((Number) JsonPath.read(result.getResponse().getContentAsString(), "$.id")).longValue();
+
+		mockMvc.perform(get("/product/{id}", id))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.vender").value("测试供应商"));
+	}
+
+	@Test
 	void saveReturnsCostWithFourDecimalPlaces() throws Exception {
 		long brandId = createBrand("BRAND-E", "品牌E");
 
